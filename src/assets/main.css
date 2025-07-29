@@ -21,19 +21,17 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    /* place-items: center; */
-    justify-content: center;
-    align-items: start;
-    background-color: antiquewhite;
-  }
+body {
+  display: flex;
+  /* place-items: center; */
+  justify-content: center;
+  align-items: start;
+  background-color: antiquewhite;
+}
 
-  #app {
-    display: grid;
-    /* grid-template-columns: 1fr 1fr; */
-    padding: 0 2rem;
-    padding-top: 60px;
-  }
+#app {
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  padding: 0 2rem;
+  padding-top: 50px;
 }

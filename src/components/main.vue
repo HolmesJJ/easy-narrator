@@ -145,7 +145,15 @@ const handleKeyDown = async (e) => {
         if (res.headers.get('Content-Type')?.startsWith('application/json')) {
           const data = await res.json();
           console.log('录音上传成功', data);
-          if (data.position) {
+          if (data.status) {
+            if (data.status == 1) {
+              const audio = audioRef.value;
+              audio.play();
+            } else if (data.status == 2) {
+              const audio = audioRef.value;
+              audio.pause();
+            }
+          } else if (data.position) {
             const seconds = data.position / 1000; // 获取返回的秒数
             if (audioRef.value) {
               const audio = audioRef.value;
@@ -253,11 +261,11 @@ const checkAllResources = async () => {
   if (videoExists.value && audioExists.value) {
     return
   }
-  checkTimer = setTimeout(checkAllResources, 2000); // 每2秒检测一次
+  checkTimer = setTimeout(checkAllResources, 5000); // 每2秒检测一次
 };
 
 onMounted(() => {
-  // checkAllResources();
+  checkAllResources();
 });
 const clearResources = () => {
   videoExists.value = false;
@@ -419,13 +427,13 @@ video {
   display: flex;
   justify-content: start;
   align-items: end;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .audioContent {}
 
 .videoContent {
-  width: 600px;
+  width: 500px;
   margin-top: 40px;
 }
 
@@ -438,7 +446,6 @@ video {
   border-radius: 8px;
   cursor: pointer;
   outline: none;
-  margin-top: 20px;
   text-align: center;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, opacity 0.2s;
   box-shadow: 0 2px 8px rgba(222, 184, 135, 0.12);
